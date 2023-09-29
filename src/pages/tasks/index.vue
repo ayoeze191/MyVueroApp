@@ -24,7 +24,6 @@ onMounted(async() => {
 })
   </script>
 
-
 <template>
   <div>
     all Tasks
