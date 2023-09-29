@@ -147,7 +147,7 @@ async function createServer() {
           preloadLinks,
           initialState,
         } = await render(url.pathname, manifest)
-        // console.log(appHtml)
+        console.log(appHtml)
         // inject the app-rendered HTML into the template
         const html = template
           .replace(`<html>`, `<html${htmlAttrs}>`)

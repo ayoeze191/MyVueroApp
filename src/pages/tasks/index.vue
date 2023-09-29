@@ -14,7 +14,13 @@ onServerPrefetch( () =>{
 })
 
 onMounted(async() => {
+  try{
   allTasks.value =  (await axios.get('https://jsonplaceholder.typicode.com/photos')).data.slice(0, 20)
+  }
+  catch(err){
+    console.log(err, "error ti waooo")
+  }
+  console.log("ashjsnm")
 })
   </script>
 

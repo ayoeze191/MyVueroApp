@@ -5,22 +5,27 @@ import axios from "axios";
 import {useRoute} from "vue-router";
 
 const route = useRoute()
-const task = ref({"title": "hello"})
+const task = ref(null)
 
 onServerPrefetch(async () =>{
-  task.value =  (await axios.get(`https://jsonplaceholder.typicode.com/photos/${route.params.id}`)).data
+  const servertask = ref({"title": "hello"})
+  servertask.value =  (await axios.get(`https://jsonplaceholder.typicode.com/photos/${route.params.id}`)).data
   useHead({
-  title: task.value.title,
+  title: servertask.value.title,
   meta: [
     {
-      property: 'og:title', content: task.value.title 
+      property: 'og:title', content: servertask.value.title 
     },
     {
-      property: 'og:image', content: task.value.url
+      property: 'og:image', content: servertask.value.url
     },
-    { property: 'og:description', content: task.value.url }
+    { property: 'og:description', content: servertask.value.url }
   ]
     })
+})
+
+onMounted(async() => {
+  task.value =  (await axios.get(`https://jsonplaceholder.typicode.com/photos/${route.params.id}`)).data
 })
 
 </script>
@@ -28,7 +33,12 @@ onServerPrefetch(async () =>{
 <template>
   <div>
     Hello task
-    {{ task.title }}
+    <div v-if="task != null">
+      {{ task.title }}
+    </div>
+    <div v-else>
+      non
+    </div>
   </div>
 </template>
 
